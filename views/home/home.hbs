@@ -1,0 +1,277 @@
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: #fff8e7;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 1100px;
+        margin: auto;
+    }
+
+    .header {
+        background: linear-gradient(90deg, #ffc107, #ffb300);
+        color: black;
+        padding: 25px;
+        margin-top: 20px;
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .table-box {
+        background: #fff3cd;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #ffc107;
+        color: black;
+        padding: 15px;
+        text-align: left;
+        border-radius: 6px;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #ffe08a;
+    }
+
+    tr:hover {
+        background: #fff9e6;
+    }
+
+    .paid {
+        background: #16a34a;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .unpaid a {
+        background: #dc2626;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .status-btn {
+        background: #f59e0b;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .status-btn:hover {
+        background: #d97706;
+    }
+
+    .paid-row {
+        background: #e6f4ea;
+    }
+
+    .unpaid-row {
+        background: #fff2e6;
+    }
+
+    .delete {
+        background: red;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 5px;
+        text-decoration: none
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .blacklist-btn {
+        background: black;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+    .blacklist-btn:hover {
+        background: #262626;
+    }
+</style>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Qarz Management</h1>
+    </div>
+
+    <div class="table-box">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Ism</th>
+                    <th>Summa</th>
+                    <th>Berilgan kun</th>
+                    <th>Olinadigan kun</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each lends}}
+                <tr>
+
+                    <td>{{full_name}}</td>
+
+                    <td>{{summa}} so'm</td>
+
+                    <td>{{give_day}}</td>
+
+                    <td>{{take_day}}</td>
+
+                    <td class="status-cell">
+                        <span class="unpaid">
+                            <a href="#" class="black-btn" data-id="{{id}}">
+                                To'lanmagan
+                            </a>
+                        </span>
+                    </td>
+
+                    <td>
+
+
+                        <div class="box">
+
+
+                            <button class="status-btn" data-id="{{id}}">
+                                To'landi
+                            </button>
+
+                            <button class="blacklist-btn" data-id="{{id}}">
+                                Qora ro'yxat
+                            </button>
+
+                            <a href="/debt/delete/{{id}}" class="delete">
+
+                                O'chirish
+
+                            </a>
+                        </div>
+
+                    </td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const buttons = document.querySelectorAll('.status-btn');
+
+        buttons.forEach(btn => {
+
+            const row = btn.closest('tr');
+            const id = btn.dataset.id;
+
+            if (localStorage.getItem("paid_" + id)) {
+
+                const statusCell = row.querySelector('.status-cell span');
+
+                statusCell.textContent = "To'langan";
+                statusCell.classList.remove('unpaid');
+                statusCell.classList.add('paid');
+
+                btn.disabled = true;
+
+            }
+
+            btn.addEventListener('click', () => {
+
+                const statusCell = row.querySelector('.status-cell span');
+
+                statusCell.textContent = "To'langan";
+                statusCell.classList.remove('unpaid');
+                statusCell.classList.add('paid');
+
+                localStorage.setItem("paid_" + id, true);
+
+                btn.disabled = true;
+
+            });
+
+        });
+
+
+        // BLACKLIST
+
+        const blackButtons = document.querySelectorAll('.blacklist-btn')
+
+        blackButtons.forEach(btn => {
+
+            btn.addEventListener('click', (e) => {
+
+                const row = e.target.closest('tr')
+
+                const id = btn.dataset.id
+
+                const data = {
+
+                    id: id,
+                    name: row.children[0].textContent,
+                    summa: row.children[1].textContent,
+                    give: row.children[2].textContent,
+                    take: row.children[3].textContent
+
+                }
+
+                let blacklist = JSON.parse(localStorage.getItem("blacklist")) || []
+
+                if (!blacklist.find(item => item.id == id)) {
+
+                    blacklist.push(data)
+
+                }
+
+                localStorage.setItem("blacklist", JSON.stringify(blacklist))
+
+                window.location.href = "debt/blacklist"
+
+            })
+
+        })
+
+    })
+
+</script>

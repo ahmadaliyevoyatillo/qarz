@@ -1,0 +1,124 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+.container{
+    width:1200px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    background: linear-gradient(90deg,#FFD700,#FFC000,#FFB300);
+    padding:20px 0;
+    box-shadow:0 5px 25px rgba(255,200,0,0.4);
+}
+
+.header__box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+/* LOGO */
+
+.logo h2{
+    color:black;
+    font-size:28px;
+    font-weight:800;
+}
+
+/* NAV */
+
+.nav{
+    display:flex;
+    gap:40px;
+}
+
+.nav a{
+    text-decoration:none;
+    color:black;
+    font-size:18px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav a:hover{
+    color:white;
+    transform:scale(1.1);
+}
+
+/* BUTTONS */
+
+.header__btns{
+    display:flex;
+    gap:15px;
+}
+
+.login{
+    padding:10px 25px;
+    border:none;
+    background:black;
+    color:gold;
+    font-weight:600;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login:hover{
+    background:white;
+    color:black;
+}
+
+.credit{
+    padding:10px 25px;
+    border:none;
+    background:white;
+    color:black;
+    font-weight:700;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.credit:hover{
+    background:black;
+    color:gold;
+}
+
+
+
+
+
+
+.lend-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:300px;
+}
+
+.lend-form input{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.lend-form button{
+    padding:12px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+
+
+

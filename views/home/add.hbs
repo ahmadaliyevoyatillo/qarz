@@ -1,0 +1,203 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+        background: linear-gradient(90deg, #FFD700, #FFC000, #FFB300);
+        padding: 20px 0;
+        box-shadow: 0 5px 25px rgba(255, 200, 0, 0.4);
+    }
+
+    .header__box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* LOGO */
+
+    .logo h2 {
+        color: black;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    /* NAV */
+
+    .nav {
+        display: flex;
+        gap: 40px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .nav a:hover {
+        color: white;
+        transform: scale(1.1);
+    }
+
+    /* BUTTONS */
+
+    .header__btns {
+        display: flex;
+        gap: 15px;
+    }
+
+    .login {
+        padding: 10px 25px;
+        border: none;
+        background: black;
+        color: gold;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .login:hover {
+        background: white;
+        color: black;
+    }
+
+    .credit {
+        padding: 10px 25px;
+        border: none;
+        background: white;
+        color: black;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .credit:hover {
+        background: black;
+        color: gold;
+    }
+
+
+
+
+
+
+    .lend-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 300px;
+    }
+
+    .lend-form input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    .lend-form button {
+        padding: 12px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    /* Formani umumiy styling */
+    .lend-form {
+        background-color: #fff8dc;
+        /* och sariq fon */
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 400px;
+        margin: 50px auto;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Inputlarni styling */
+    .lend-form input {
+        padding: 12px 15px;
+        border: 2px solid #ffeb3b;
+        /* sariq border */
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .lend-form input:focus {
+        border-color: #fbc02d;
+        /* fokusda biroz qorong‘iroq sariq */
+        box-shadow: 0 0 8px rgba(255, 235, 59, 0.5);
+    }
+
+    /* Tugma styling */
+    .lend-form button {
+        padding: 12px 20px;
+        background: linear-gradient(45deg, #ffeb3b, #fdd835);
+        color: #000;
+        font-weight: bold;
+        font-size: 16px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 235, 59, 0.4);
+    }
+
+    .lend-form button:hover {
+        background: linear-gradient(45deg, #fdd835, #ffc107);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 235, 59, 0.6);
+    }
+
+    /* Placeholder styling */
+    .lend-form input::placeholder {
+        color: #c49f0f;
+        font-weight: 500;
+    }
+
+    /* Responsiv kichik ekranlar uchun */
+    @media (max-width: 450px) {
+        .lend-form {
+            padding: 20px;
+            max-width: 90%;
+        }
+    }
+</style>
+<form action="/debt/add" method="POST" class="lend-form">
+
+    <input type="text" name="full_name" placeholder="Ism familya" required>
+
+    <input type="number" name="summa" placeholder="Summa" required>
+
+    <input type="date" name="give_day" required>
+
+    <input type="date" name="take_day" required>
+
+    <button type="submit">
+        Qo'shish
+    </button>
+
+</form>

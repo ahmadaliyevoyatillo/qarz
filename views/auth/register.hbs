@@ -1,0 +1,367 @@
+<style>
+    /* Register form container */
+    .form-register {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px 25px;
+        background-color: #fff8e7;
+        /* engil sariq fon */
+        border: 2px solid #FFD700;
+        /* sariq chekka */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Form title */
+    .form-register h2 {
+        text-align: center;
+        color: #FFD700;
+        margin-bottom: 10px;
+    }
+
+    /* Input fields */
+    .form-register input {
+        padding: 12px;
+        border: 1px solid #FFD700;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    /* Button */
+    .form-register button {
+        padding: 12px;
+        background-color: #FFD700;
+        /* sariq tugma */
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .form-register button:hover {
+        background-color: #FFC000;
+        color: #fff;
+    }
+
+    /* Paragraph and link */
+    .form-register p {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .form-register p a {
+        color: #FFA500;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .form-register p a:hover {
+        text-decoration: underline;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+        background: linear-gradient(90deg, #FFD700, #FFC000, #FFB300);
+        padding: 20px 0;
+        box-shadow: 0 5px 25px rgba(255, 200, 0, 0.4);
+    }
+
+    .header__box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* LOGO */
+
+    .logo h2 {
+        color: black;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    /* NAV */
+
+    .nav {
+        display: flex;
+        gap: 40px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .nav a:hover {
+        color: white;
+        transform: scale(1.1);
+    }
+
+    /* BUTTONS */
+
+    .header__btns {
+        display: flex;
+        gap: 15px;
+    }
+
+    .login {
+        padding: 10px 25px;
+        border: none;
+        background: black;
+        color: gold;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .login:hover {
+        background: white;
+        color: black;
+    }
+
+    .credit {
+        padding: 10px 25px;
+        border: none;
+        background: white;
+        color: black;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .credit:hover {
+        background: black;
+        color: gold;
+    }
+
+
+
+
+
+
+    .lend-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 300px;
+    }
+
+    .lend-form input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    .lend-form button {
+        padding: 12px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+     form {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff8e7;
+        /* engil sariq fon */
+        border: 2px solid #FFD700;
+        /* sariq chekka */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        font-family: Arial, sans-serif;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #FFD700;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #FFD700;
+        /* sariq tugma */
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #FFC000;
+        /* hover effekti */
+    }
+
+    a {
+        text-align: center;
+        color: #FFA500;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+        background: linear-gradient(90deg, #FFD700, #FFC000, #FFB300);
+        padding: 20px 0;
+        box-shadow: 0 5px 25px rgba(255, 200, 0, 0.4);
+    }
+
+    .header__box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* LOGO */
+
+    .logo h2 {
+        color: black;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    /* NAV */
+
+    .nav {
+        display: flex;
+        gap: 40px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .nav a:hover {
+        color: white;
+        transform: scale(1.1);
+    }
+
+    /* BUTTONS */
+
+    .header__btns {
+        display: flex;
+        gap: 15px;
+    }
+
+    .login {
+        padding: 10px 25px;
+        border: none;
+        background: black;
+        color: gold;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .login:hover {
+        background: white;
+        color: black;
+    }
+
+    .credit {
+        padding: 10px 25px;
+        border: none;
+        background: white;
+        color: black;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .credit:hover {
+        background: black;
+        color: gold;
+    }
+
+
+
+
+
+
+    .lend-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 300px;
+    }
+
+    .lend-form input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    .lend-form button {
+        padding: 12px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+</style>
+
+<form action="/auth/register" method="POST" class="form-register">
+    <h2>Register</h2>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <button type="submit">Register</button>
+    <p>Already have an account? <a href="/auth/login">Login</a></p>
+</form>

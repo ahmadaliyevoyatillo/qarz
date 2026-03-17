@@ -1,0 +1,330 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+        background: linear-gradient(90deg, #FFD700, #FFC000, #FFB300);
+        padding: 20px 0;
+        box-shadow: 0 5px 25px rgba(255, 200, 0, 0.4);
+    }
+
+    .header__box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* LOGO */
+
+    .logo h2 {
+        color: black;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    /* NAV */
+
+    .nav {
+        display: flex;
+        gap: 40px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .nav a:hover {
+        color: white;
+        transform: scale(1.1);
+    }
+
+    /* BUTTONS */
+
+    .header__btns {
+        display: flex;
+        gap: 15px;
+    }
+
+    .login {
+        padding: 10px 25px;
+        border: none;
+        background: black;
+        color: gold;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .login:hover {
+        background: white;
+        color: black;
+    }
+
+    .credit {
+        padding: 10px 25px;
+        border: none;
+        background: white;
+        color: black;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .credit:hover {
+        background: black;
+        color: gold;
+    }
+
+
+
+
+
+
+    .lend-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 300px;
+    }
+
+    .lend-form input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    .lend-form button {
+        padding: 12px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6f9;
+    }
+
+    /* container */
+
+    .container {
+        width: 1200px;
+        margin: 40px auto;
+    }
+
+    /* title */
+
+    .page-title {
+        background: linear-gradient(90deg, #FFD700, #FFC000, #FFB300);
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 28px;
+        font-weight: bold;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* table box */
+
+    .table-box {
+        background: white;
+        margin-top: 20px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* table */
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #ffc107;
+        padding: 15px;
+        text-align: left;
+        font-size: 18px;
+    }
+
+    td {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+    }
+
+    tr {
+        transition: .3s;
+    }
+
+    tr:hover {
+        background: #fff8e1;
+    }
+
+    /* blacklist row */
+
+    .black-row {
+        background: #fff1f1;
+    }
+
+    /* money */
+
+    .summa {
+        font-weight: bold;
+        color: #dc2626;
+    }
+
+    /* date */
+
+    .date {
+        color: #555;
+        font-size: 14px;
+    }
+
+    /* button */
+
+    .remove {
+        background: #16a34a;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 7px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+    .remove:hover {
+        background: #15803d;
+        transform: scale(1.05);
+    }
+
+    /* empty */
+
+    .empty {
+        text-align: center;
+        padding: 40px;
+        color: #777;
+        font-size: 18px;
+    }
+</style>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Qora ro'yxat</h1>
+    </div>
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Ism</th>
+                    <th>Summa</th>
+                    <th>Berilgan kun</th>
+                    <th>Olinadigan kun</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="blackTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        let data = JSON.parse(localStorage.getItem("blacklist")) || []
+
+        const table = document.getElementById("blackTable")
+
+        table.innerHTML = ""
+
+        data.forEach(item => {
+
+            table.innerHTML += `
+
+<tr style="background:#ffe5e5">
+
+<td>${item.name}</td>
+
+<td>${item.summa}</td>
+
+<td>${item.give}</td>
+
+<td>${item.take}</td>
+
+<td>
+
+<button onclick="removeItem('${item.id}')"
+style="background:green;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:5px;
+cursor:pointer">
+
+Kechirish
+
+</button>
+
+</td>
+
+</tr>
+
+`
+
+        })
+
+    })
+
+    function removeItem(id) {
+
+        let data = JSON.parse(localStorage.getItem("blacklist")) || []
+
+        data = data.filter(item => item.id != id)
+
+        localStorage.setItem("blacklist", JSON.stringify(data))
+
+        location.reload()
+
+    }
+
+</script>
