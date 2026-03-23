@@ -3,15 +3,16 @@ const router = require("express").Router()
 const {
     Register,
     Login,
-    Logout
+    Logout,
+    VerifyTelegram,
 } = require("../controllers/authController")
 
 router.get("/login", (req, res) => {
-    res.render("auth/login")
+    res.render("auth/login", { title: "Kirish bo'limi" })
 })
 
 router.get("/register", (req, res) => {
-    res.render("auth/register")
+    res.render("auth/register", { title: "Akkaunt Yaratish bo'limi" })
 })
 
 router.post("/register", Register)

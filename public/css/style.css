@@ -119,6 +119,266 @@
     cursor:pointer;
 }
 
+/* Barcha umumiy styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 1200px;
+    margin: auto;
+    padding: 0 15px; /* kichik ekranlarda chekka */
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(90deg,#FFD700,#FFC000,#FFB300);
+    padding: 20px 0;
+    box-shadow: 0 5px 25px rgba(255,200,0,0.4);
+}
+
+.header__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* kichik ekranlarda tugmalar pastga tushadi */
+}
+
+/* LOGO */
+.logo h2 {
+    color:black;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+/* NAV */
+.nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.nav a:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+/* BUTTONS */
+.header__btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.login, .credit, .register, .logout {
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Lend form */
+.lend-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Table box */
+.table-box {
+    overflow-x: auto; /* jadvalni gorizontal scroll qilamiz */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* kichik ekranlarda scroll */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+/* RESPONSIV STYLING */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .header__box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .nav {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .lend-form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .header h2 {
+        font-size: 24px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 450px) {
+    .lend-form {
+        width: 100%;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header__btns {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .header__btns button {
+        width: 100%;
+    }
+}
 
 
 
+
+
+
+
+
+
+/* =======================
+   RESPONSIVE DESIGN
+======================= */
+
+/* Planshet */
+@media (max-width: 992px){
+
+.container{
+    width:100%;
+    padding:0 15px;
+}
+
+.header__box{
+    flex-direction:column;
+    gap:15px;
+}
+
+.nav{
+    gap:20px;
+}
+
+table{
+    font-size:14px;
+}
+
+}
+
+/* Telefon */
+@media (max-width:768px){
+
+.logo h2{
+    font-size:22px;
+}
+
+.nav{
+    flex-direction:column;
+    width:100%;
+    gap:10px;
+}
+
+.nav a{
+    display:block;
+    width:100%;
+    background:#fff3cd;
+    padding:8px;
+    border-radius:6px;
+}
+
+.header__btns{
+    width:100%;
+    flex-direction:column;
+}
+
+.login,
+.register,
+.logout{
+    width:100%;
+}
+
+.lend-form{
+    width:95%;
+    margin:20px auto;
+}
+
+form{
+    width:95%;
+}
+
+.container{
+    width:100%;
+}
+
+table{
+    min-width:500px;
+}
+
+}
+
+/* Kichik telefon */
+@media (max-width:480px){
+
+.logo h2{
+    font-size:20px;
+}
+
+.header{
+    padding:15px 0;
+}
+
+.lend-form{
+    padding:15px;
+}
+
+th,td{
+    padding:8px;
+    font-size:13px;
+}
+
+button{
+    font-size:14px;
+}
+
+}

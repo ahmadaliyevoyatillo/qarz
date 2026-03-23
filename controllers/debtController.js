@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const db = require("../models")
 const Lend = db.Lend
 
@@ -67,9 +68,51 @@ const GetBlackList = async (req, res) => {
     }
 }
 
+
+const GetEdit = async (req, res) => {
+
+    const lend = await Lend.findOne({
+        where: {
+            id: req.params.id,
+            userId: req.session.user.id
+        }
+    })
+
+    const lendPlain = lend.get({ plain: true })
+
+    lendPlain.give_day =
+        lendPlain.give_day.toISOString().split('T')[0]
+
+    lendPlain.take_day =
+        lendPlain.take_day.toISOString().split('T')[0]
+
+    res.render("home/update", {
+        title: "Update",
+        lend: lendPlain
+    })
+
+}
+
+const Edit = async (req, res) => {
+    try {
+        const { full_name, summa, give_day, take_day } = req.body
+
+        await Lend.update(
+            { full_name, summa, give_day, take_day },
+            { where: { id: req.params.id, userId: req.session.user.id } }
+        )
+
+        res.redirect("/debt")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     GetAll,
     AddLend,
     DeleteLend,
-    GetBlackList
+    GetBlackList,
+    GetEdit,
+    Edit
 }

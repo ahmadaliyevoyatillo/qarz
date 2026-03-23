@@ -61,7 +61,7 @@
         font-weight: bold;
     }
 
-    .unpaid a {
+    .unpaid {
         background: #dc2626;
         color: white;
         padding: 5px 10px;
@@ -121,13 +121,188 @@
     .blacklist-btn:hover {
         background: #262626;
     }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+        width: 140px;
+    }
+
+    .status-btn,
+    .blacklist-btn,
+    .delete {
+
+        display: block;
+        text-align: center;
+        width: 100%;
+        padding: 8px 0;
+        border-radius: 7px;
+        font-weight: bold;
+        text-decoration: none;
+
+    }
+
+    .box {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        width: 150px;
+    }
+
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 150px;
+    }
+
+    .status-btn {
+        background: #f59e0b;
+        color: white;
+        padding: 8px;
+        border-radius: 6px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .blacklist-btn {
+        background: black;
+        color: white;
+        padding: 8px;
+        border-radius: 6px;
+    }
+
+    .delete {
+        background: red;
+        color: white;
+        padding: 8px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    /* =======================
+   RESPONSIVE DESIGN
+======================= */
+
+    /* Planshet */
+    @media (max-width: 992px) {
+
+        .container {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .header__box {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav {
+            gap: 20px;
+        }
+
+        table {
+            font-size: 14px;
+        }
+
+    }
+
+    /* Telefon */
+    @media (max-width:768px) {
+
+        .logo h2 {
+            font-size: 22px;
+        }
+
+        .nav {
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .nav a {
+            display: block;
+            width: 100%;
+            background: #fff3cd;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .header__btns {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        .login,
+        .register,
+        .logout {
+            width: 100%;
+        }
+
+        .lend-form {
+            width: 95%;
+            margin: 20px auto;
+        }
+
+        form {
+            width: 95%;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        table {
+            min-width: 500px;
+        }
+
+    }
+
+    /* Kichik telefon */
+    @media (max-width:480px) {
+
+        .logo h2 {
+            font-size: 20px;
+        }
+
+        .header {
+            padding: 15px 0;
+        }
+
+        .lend-form {
+            padding: 15px;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        button {
+            font-size: 14px;
+        }
+
+    }
 </style>
 
 <div class="container">
 
     <div class="header">
-        <h1>Qarz Management</h1>
+        <h1>Qarzdorlar ro'yhati</h1>
     </div>
+
+    <input type="text" id="searchInput" placeholder="Ism bo'yicha qidirish..." style="
+width:300px;
+padding:10px;
+margin:15px 0;
+border:2px solid #ffc107;
+border-radius:6px;
+font-size:16px;
+">
 
     <div class="table-box">
 
@@ -138,8 +313,8 @@
                     <th>Summa</th>
                     <th>Berilgan kun</th>
                     <th>Olinadigan kun</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Holati</th>
+                    <th>Holat ishi</th>
                 </tr>
             </thead>
             <tbody>
@@ -156,19 +331,13 @@
 
                     <td class="status-cell">
                         <span class="unpaid">
-                            <a href="#" class="black-btn" data-id="{{id}}">
-                                To'lanmagan
-                            </a>
+                            To'lanmagan
                         </span>
                     </td>
 
                     <td>
-
-
                         <div class="box">
-
-
-                            <button class="status-btn" data-id="{{id}}">
+                            <button class="status-btn toggle-paid-btn" data-id="{{id}}">
                                 To'landi
                             </button>
 
@@ -177,14 +346,14 @@
                             </button>
 
                             <a href="/debt/delete/{{id}}" class="delete">
-
                                 O'chirish
+                            </a>
 
+                            <a href="/debt/edit/{{id}}" class="status-btn">
+                                Yangilash
                             </a>
                         </div>
-
                     </td>
-
                 </tr>
                 {{/each}}
             </tbody>
@@ -195,83 +364,103 @@
 </div>
 
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
 
-        const buttons = document.querySelectorAll('.status-btn');
+        const buttons = document.querySelectorAll('.toggle-paid-btn');
 
         buttons.forEach(btn => {
-
             const row = btn.closest('tr');
             const id = btn.dataset.id;
+            const statusCell = row.querySelector('.status-cell span');
 
-            if (localStorage.getItem("paid_" + id)) {
-
-                const statusCell = row.querySelector('.status-cell span');
-
-                statusCell.textContent = "To'langan";
-                statusCell.classList.remove('unpaid');
-                statusCell.classList.add('paid');
-
-                btn.disabled = true;
-
+            // Boshlang'ich statusni localStorage dan o'qib olamiz
+            let paid = localStorage.getItem("paid_" + id);
+            if (paid === null) {
+                // Agar localStorage bo'sh bo'lsa, default = false (To'lanmagan)
+                paid = false;
+            } else {
+                paid = paid === "true";
             }
 
+            // Tugma va statusni boshlang'ich holatga qo'yish
+            const setStatus = () => {
+                if (paid) {
+                    statusCell.textContent = "To'landi";
+                    statusCell.classList.remove('unpaid');
+                    statusCell.classList.add('paid');
+                    btn.textContent = "To'lanmadi";
+                } else {
+                    statusCell.textContent = "To'lanmagan";
+                    statusCell.classList.remove('paid');
+                    statusCell.classList.add('unpaid');
+                    btn.textContent = "To'landi";
+                }
+            };
+
+            setStatus();
+
             btn.addEventListener('click', () => {
+                paid = !paid;      // Toggle holat
+                btn.addEventListener('click', async () => {
 
-                const statusCell = row.querySelector('.status-cell span');
+                    await fetch("/debt/toggle/" + id, {
+                        method: "POST"
+                    })
 
-                statusCell.textContent = "To'langan";
-                statusCell.classList.remove('unpaid');
-                statusCell.classList.add('paid');
+                    location.reload()
 
-                localStorage.setItem("paid_" + id, true);
-
-                btn.disabled = true;
-
+                });
+                setStatus();       // Status va tugmani yangilash
             });
-
         });
 
-
-        // BLACKLIST
-
-        const blackButtons = document.querySelectorAll('.blacklist-btn')
+        // BLACKLIST tugmalari
+        const blackButtons = document.querySelectorAll('.blacklist-btn');
 
         blackButtons.forEach(btn => {
-
             btn.addEventListener('click', (e) => {
-
-                const row = e.target.closest('tr')
-
-                const id = btn.dataset.id
-
+                const row = e.target.closest('tr');
+                const id = btn.dataset.id;
                 const data = {
-
                     id: id,
                     name: row.children[0].textContent,
                     summa: row.children[1].textContent,
                     give: row.children[2].textContent,
                     take: row.children[3].textContent
+                };
 
-                }
-
-                let blacklist = JSON.parse(localStorage.getItem("blacklist")) || []
-
+                let blacklist = JSON.parse(localStorage.getItem("blacklist")) || [];
                 if (!blacklist.find(item => item.id == id)) {
-
-                    blacklist.push(data)
-
+                    blacklist.push(data);
                 }
 
-                localStorage.setItem("blacklist", JSON.stringify(blacklist))
+                localStorage.setItem("blacklist", JSON.stringify(blacklist));
+                window.location.href = "debt/blacklist";
+            });
+        });
 
-                window.location.href = "debt/blacklist"
+    });
 
-            })
+
+    const searchInput = document.getElementById("searchInput")
+
+    searchInput.addEventListener("keyup", function () {
+
+        let filter = searchInput.value.toLowerCase()
+
+        let rows = document.querySelectorAll("tbody tr")
+
+        rows.forEach(row => {
+
+            let name = row.children[0].textContent.toLowerCase()
+
+            if (name.includes(filter)) {
+                row.style.display = ""
+            } else {
+                row.style.display = "none"
+            }
 
         })
 
     })
-
 </script>

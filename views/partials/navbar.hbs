@@ -27,28 +27,28 @@
         <div class="header__box">
 
             <div class="logo">
-                <h2>QARZ SYSTEM</h2>
+                <h2>QARZ.UZ</h2>
             </div>
 
             {{#if user}}
             <nav class="nav">
                 <a href="/debt">Asosiy</a>
                 <a href="/debt/add">Qarz qo'shish</a>
-                <a href="/debt/blacklist">Black list</a>
+                <a href="/debt/blacklist">Qora ro'yhat</a>
             </nav>
 
             <div class="header__btns">
                 <a href="/auth/logout">
-                    <button class="logout">Logout</button>
+                    <button class="logout">Chiqish</button>
                 </a>
             </div>
             {{else}}
             <div class="header__btns">
                 <a href="/auth/login">
-                    <button class="login">Login</button>
+                    <button class="login">Kirish</button>
                 </a>
                 <a href="/auth/register">
-                    <button class="register">Register</button>
+                    <button class="register">Akkaunt Yaratish</button>
                 </a>
             </div>
             {{/if}}

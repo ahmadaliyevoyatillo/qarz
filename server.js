@@ -31,8 +31,6 @@ app.set("views", "./views")
 
 app.use(express.static("public"));
 
-
-
 app.use(session({
   secret: "some_secret_key",
   resave: false,
@@ -58,7 +56,7 @@ const start = async () => {
 
   try {
 
-    await db.sequelize.sync({ force: false });
+    await db.sequelize.sync({ force: true });
 
     app.listen(PORT, () => {
 

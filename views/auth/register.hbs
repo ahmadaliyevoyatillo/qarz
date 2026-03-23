@@ -185,7 +185,8 @@
         border-radius: 6px;
         cursor: pointer;
     }
-     form {
+
+    form {
         max-width: 400px;
         margin: 50px auto;
         padding: 20px;
@@ -356,12 +357,127 @@
         border-radius: 6px;
         cursor: pointer;
     }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1200px) {
+        .container {
+            width: 95%;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        form,
+        .form-register {
+            max-width: 90%;
+            margin: 30px auto;
+            padding: 15px;
+        }
+
+        input {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        button {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .header__box {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .nav {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .header__btns {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .login,
+        .credit {
+            width: 100%;
+        }
+
+    }
+
+    @media (max-width: 480px) {
+
+        form,
+        .form-register {
+            max-width: 95%;
+            padding: 12px;
+        }
+
+        .logo h2 {
+            font-size: 22px;
+        }
+
+        .nav a {
+            font-size: 16px;
+        }
+
+        input {
+            font-size: 13px;
+        }
+
+        button {
+            font-size: 13px;
+        }
+
+    }
 </style>
 
 <form action="/auth/register" method="POST" class="form-register">
-    <h2>Register</h2>
-    <input name="email" type="email" placeholder="Email" required>
-    <input name="password" type="password" placeholder="Password" required>
-    <button type="submit">Register</button>
-    <p>Already have an account? <a href="/auth/login">Login</a></p>
+    <h2>Akkunt Yaratish</h2>
+    <input name="user_name" type="name" placeholder="To'liq ismingiz" required>
+    <input name="born_day" type="date" placeholder="Tug'ilgan sana" required>
+    <input name="email" type="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        title="To'g'ri email kiriting (example@gmail.com)" required>
+    <input name="password" type="password" placeholder="Parol" required>
+    <input name="telegram_id" placeholder="Telegram ID" required>
+    <button type="submit">Akkaunt Yaratish</button>
+    <p>Akkuntiz bormi <a href="/auth/login">Kirish</a></p>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const params = new URLSearchParams(window.location.search)
+
+    if (params.get("error") === "email") {
+        alert("Email topilmadi")
+    }
+
+    if (params.get("error") === "password") {
+        alert("Password noto'g'ri")
+    }
+
+    if (params.get("error") === "server") {
+        alert("Server xatosi")
+    }
+
+    if (params.get("success") === "register") {
+        alert("Register muvaffaqiyatli")
+    }
+
+    if (params.get("success") === "logout") {
+        alert("Chiqdingiz")
+    }
+    if (params.get("error") === "emailformat") {
+        alert("To'g'ri email kiriting (example@gmail.com)")
+    }
+    if (params.get("error") === "code") {
+        alert("Email kodi noto'g'ri")
+    }
+    if (params.get("error") === "passwordshort") {
+        alert("Password kamida 8 belgidan iborat bo'lishi kerak")
+    }
+</script>
