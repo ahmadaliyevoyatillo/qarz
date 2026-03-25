@@ -1,8 +1,10 @@
 const { Sequelize } = require("sequelize")
 
-const isRender = process.env.DATABASE_URL?.includes("render.com")
+const dbUrl = process.env.DATABASE_URL
 
-const sequelize = new Sequelize(process.env.DATABASE_URL,{
+const isRender = dbUrl && dbUrl.includes("render.com")
+
+const sequelize = new Sequelize(dbUrl,{
  dialect:"postgres",
  protocol:"postgres",
  logging:false,
@@ -15,7 +17,12 @@ const sequelize = new Sequelize(process.env.DATABASE_URL,{
  } : {}
 })
 
-module.exports = {
- sequelize,
- Sequelize
-}
+const db = {}
+
+db.sequelize = sequelize
+db.Sequelize = Sequelize
+
+db.User = require("./user")(sequelize, Sequelize)
+db.Lend = require("./lend")(sequelize, Sequelize)
+
+module.exports = db
