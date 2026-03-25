@@ -26,3 +26,4 @@ db.User = require("./user")(sequelize, Sequelize)
 db.Lend = require("./lend")(sequelize, Sequelize)
 
 module.exports = db
+
