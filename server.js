@@ -8,9 +8,11 @@ const hbs = require("express-handlebars")
 
 const app = express();
 app.use(cookieParser());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.engine("hbs", hbs.engine({ extname: "hbs" }))
+
 app.set("view engine", "hbs")
 app.set("views", "./views")
 app.use(express.static("public"));
